@@ -50,7 +50,7 @@ public class Client implements Runnable{
                                         if (input.split(" ")[0].toLowerCase().equals("login") == true) {
                                             String[] vals = input.split(" ");
                                             
-                                            if (this._userlist.contains(new Pair(vals[1], vals[2])) == true) {
+                                            if (this._userlist.contains(new Pair(vals[1], vals[2].hashCode())) == true) {
                                                 if (this.login == false) {
                                                     this._loginlist.add(new Pair(this.socket, vals[1]));
                                                     this.username = vals[1];

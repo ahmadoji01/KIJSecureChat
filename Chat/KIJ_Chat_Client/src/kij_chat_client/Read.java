@@ -57,7 +57,7 @@ public class Read implements Runnable {
                                             String message = input.split(" ")[3];
                                             byte[] b = Base64.getDecoder().decode(message);
                                             EncryptionUtil decryptText = new EncryptionUtil(dest);
-                                            String decryptedText = decryptText.decrypt(b).toString();
+                                            String decryptedText = decryptText.decrypt(b, 0).toString();
                                             System.out.println(source + ": " + decryptedText);
                                         }
                                         

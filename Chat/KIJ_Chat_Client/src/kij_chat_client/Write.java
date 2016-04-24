@@ -42,7 +42,13 @@ public class Write implements Runnable {
                                 {
                                     String dest = input.split(" ")[1];
                                     EncryptionUtil encryptText = new EncryptionUtil(dest);
-                                    byte[] b = encryptText.encrypt(input.split(" ")[2]);
+                                    String message = "";
+                                    String[] separatedMessage = input.split(" ");
+                                    for(int i = 2; i < separatedMessage.length; i++)
+                                    {
+                                        message += separatedMessage[i] + " ";
+                                    }
+                                    byte[] b = encryptText.encrypt(message, 0);
                                     //String encryptedText = encryptText.encrypt(input.split(" ")[2]).toString();
                                     input = "pm " + dest + " " + (Base64.getEncoder().encodeToString(b));
                                 }

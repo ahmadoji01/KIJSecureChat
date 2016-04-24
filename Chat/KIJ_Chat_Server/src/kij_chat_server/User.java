@@ -16,11 +16,11 @@ public class User {
     private ArrayList<Pair<String,String>> _userlist = new ArrayList<>();
     
     User() {
-        _userlist.add(new Pair("Admin", "Admin"));
-        _userlist.add(new Pair("Andi", "Andi"));
-        _userlist.add(new Pair("Budi", "Budi"));
-        _userlist.add(new Pair("Rudi", "Rudi"));
-        _userlist.add(new Pair("Luci", "Luci"));
+        _userlist.add(new Pair("Admin", "Admin".hashCode()));
+        _userlist.add(new Pair("Andi", "Andi".hashCode()));
+        _userlist.add(new Pair("Budi", "Budi".hashCode()));
+        _userlist.add(new Pair("Rudi", "Rudi".hashCode()));
+        _userlist.add(new Pair("Luci", "Luci".hashCode()));
     }
     
     public ArrayList<Pair<String,String>> getUserList() {

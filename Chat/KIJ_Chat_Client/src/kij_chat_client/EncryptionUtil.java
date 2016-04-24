@@ -94,16 +94,23 @@ public class EncryptionUtil {
    * @return Encrypted text
    * @throws java.lang.Exception
    */
-  public static byte[] encrypt(String text) {
+  public static byte[] encrypt(String text, int flag) {
     byte[] cipherText = null;
     try {
       ObjectInputStream inputStream = null;
-      inputStream = new ObjectInputStream(new FileInputStream(PUBLIC_KEY_FILE));
-      final PublicKey publicKey = (PublicKey) inputStream.readObject();
-      // get an RSA cipher object and print the provider
       final Cipher cipher = Cipher.getInstance(ALGORITHM);
-      // encrypt the plain text using the public key
-      cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+      if(flag == 1)
+      {
+        inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
+        final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
+        cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+      }
+      else
+      {
+        inputStream = new ObjectInputStream(new FileInputStream(PUBLIC_KEY_FILE));
+        final PublicKey publicKey = (PublicKey) inputStream.readObject();
+        cipher.init(Cipher.ENCRYPT_MODE, publicKey);  
+      }
       cipherText = cipher.doFinal(text.getBytes());
     } catch (Exception e) {
       e.printStackTrace();
@@ -121,17 +128,24 @@ public class EncryptionUtil {
    * @return plain text
    * @throws java.lang.Exception
    */
-  public static String decrypt(byte[] text) {
+  public static String decrypt(byte[] text, int flag) {
     byte[] dectyptedText = null;
     try {
       // get an RSA cipher object and print the provider
       final Cipher cipher = Cipher.getInstance(ALGORITHM);
       ObjectInputStream inputStream = null;
-      inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
-      final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
-
-      // decrypt the text using the private key
-      cipher.init(Cipher.DECRYPT_MODE, privateKey);
+      if(flag == 1)
+      {      
+        inputStream = new ObjectInputStream(new FileInputStream(PUBLIC_KEY_FILE));
+        final PublicKey publicKey = (PublicKey) inputStream.readObject();
+        cipher.init(Cipher.DECRYPT_MODE, publicKey); 
+      }
+      else
+      {
+        inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
+        final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
+        cipher.init(Cipher.DECRYPT_MODE, privateKey); 
+      }
       dectyptedText = cipher.doFinal(text);
 
     } catch (Exception ex) {

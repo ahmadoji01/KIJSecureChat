@@ -99,7 +99,7 @@ public class Client implements Runnable{
                                                         messageOut += vals[j] + " ";
                                                     }
                                                     System.out.println(this.username + " to " + vals[1] + " : " + messageOut);
-                                                    outDest.println(this.username + ": " + messageOut);
+                                                    outDest.println("pm " + this.username + " " + vals[1] + " " + messageOut);
                                                     outDest.flush();
                                                     exist = true;
                                                 }

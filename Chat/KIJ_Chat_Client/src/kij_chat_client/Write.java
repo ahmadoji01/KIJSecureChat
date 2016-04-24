@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.xml.bind.DatatypeConverter;
+import java.util.Base64;
 
 /**
  *
@@ -36,6 +38,14 @@ public class Write implements Runnable {
 			while (keepGoing)//WHILE THE PROGRAM IS RUNNING
 			{						
 				String input = chat.nextLine();	//SET NEW VARIABLE input TO THE VALUE OF WHAT THE CLIENT TYPED IN
+                                if(input.contains("pm"))
+                                {
+                                    String dest = input.split(" ")[1];
+                                    EncryptionUtil encryptText = new EncryptionUtil(dest);
+                                    byte[] b = encryptText.encrypt(input.split(" ")[2]);
+                                    //String encryptedText = encryptText.encrypt(input.split(" ")[2]).toString();
+                                    input = "pm " + dest + " " + (Base64.getEncoder().encodeToString(b));
+                                }
 				out.println(input);//SEND IT TO THE SERVER
 				out.flush();//FLUSH THE STREAM
                                 

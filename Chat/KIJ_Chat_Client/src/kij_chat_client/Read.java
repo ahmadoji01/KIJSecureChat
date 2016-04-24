@@ -8,6 +8,7 @@ package kij_chat_client;
 /*import java.net.Socket;*/
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Base64;
 
 /**
  *
@@ -36,17 +37,28 @@ public class Read implements Runnable {
 				if(this.in.hasNext()) {
                                                                    //IF THE SERVER SENT US SOMETHING
                                         input = this.in.nextLine();
-					System.out.println(input);//PRINT IT OUT
                                         if (input.split(" ")[0].toLowerCase().equals("success")) {
                                             if (input.split(" ")[1].toLowerCase().equals("logout")) {
                                                 keepGoing = false;
+                                                System.out.println(input);//PRINT IT OUT
                                             } else if (input.split(" ")[1].toLowerCase().equals("login")) {
                                                 EncryptionUtil encrypttext = new EncryptionUtil(input.split(" ")[2]);
                                                 if(!encrypttext.areKeysPresent())
                                                     encrypttext.generateKey();
                                                 log.clear();
                                                 log.add("true");
+                                                System.out.println(input);//PRINT IT OUT
                                             }
+                                        }
+                                        else if(input.split(" ")[0].toLowerCase().equals("pm"))
+                                        {
+                                            String source = input.split(" ")[1];
+                                            String dest = input.split(" ")[2];
+                                            String message = input.split(" ")[3];
+                                            byte[] b = Base64.getDecoder().decode(message);
+                                            EncryptionUtil decryptText = new EncryptionUtil(dest);
+                                            String decryptedText = decryptText.decrypt(b).toString();
+                                            System.out.println(source + ": " + decryptedText);
                                         }
                                         
                                 }

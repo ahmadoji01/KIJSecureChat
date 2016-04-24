@@ -41,6 +41,9 @@ public class Read implements Runnable {
                                             if (input.split(" ")[1].toLowerCase().equals("logout")) {
                                                 keepGoing = false;
                                             } else if (input.split(" ")[1].toLowerCase().equals("login")) {
+                                                EncryptionUtil encrypttext = new EncryptionUtil(input.split(" ")[2]);
+                                                if(!encrypttext.areKeysPresent())
+                                                    encrypttext.generateKey();
                                                 log.clear();
                                                 log.add("true");
                                             }

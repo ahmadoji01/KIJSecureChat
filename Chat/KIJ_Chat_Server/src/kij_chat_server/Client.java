@@ -56,7 +56,7 @@ public class Client implements Runnable{
                                                     this.username = vals[1];
                                                     this.login = true;
                                                     System.out.println("Users count: " + this._loginlist.size());
-                                                    out.println("SUCCESS login");
+                                                    out.println("SUCCESS login " + vals[1]);
                                                     out.flush();
                                                 } else {
                                                     out.println("FAIL login");

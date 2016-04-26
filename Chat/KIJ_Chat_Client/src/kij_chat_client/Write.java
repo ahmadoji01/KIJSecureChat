@@ -20,6 +20,7 @@ public class Write implements Runnable {
     
 	private Scanner chat;
         private PrintWriter out;
+        private String username;
         boolean keepGoing = true;
         ArrayList<String> log;
 	
@@ -29,7 +30,7 @@ public class Write implements Runnable {
                 this.out = out;
                 this.log = log;
 	}
-	
+        
 	@Override
 	public void run()//INHERIT THE RUN METHOD FROM THE Runnable INTERFACE
 	{
@@ -52,6 +53,24 @@ public class Write implements Runnable {
                                     //String encryptedText = encryptText.encrypt(input.split(" ")[2]).toString();
                                     input = "pm " + dest + " " + (Base64.getEncoder().encodeToString(b));
                                 }
+                                
+                                else if(input.contains("login"))
+                                    this.username = input.split(" ")[1];
+                                
+                                else if(input.contains("bm"))
+                                {
+                                    EncryptionUtil encryptText = new EncryptionUtil(this.username);
+                                    String message = "";
+                                    String[] separatedMessage = input.split(" ");
+                                    for(int i = 1; i < separatedMessage.length; i++)
+                                    {
+                                        message += separatedMessage[i] + " ";
+                                    }
+                                    byte[] b = encryptText.encrypt(message, 1);
+                                    //String encryptedText = encryptText.encrypt(input.split(" ")[2]).toString();
+                                    input = "bm " + (Base64.getEncoder().encodeToString(b));
+                                }
+                                
 				out.println(input);//SEND IT TO THE SERVER
 				out.flush();//FLUSH THE STREAM
                                 

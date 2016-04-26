@@ -60,6 +60,19 @@ public class Read implements Runnable {
                                             String decryptedText = decryptText.decrypt(b, 0).toString();
                                             System.out.println(source + ": " + decryptedText);
                                         }
+                                        else if(input.split(" ")[0].toLowerCase().equals("bm"))
+                                        {
+                                            String source = input.split(" ")[1];
+                                            String message = input.split(" ")[2];
+                                            byte[] b = Base64.getDecoder().decode(message);
+                                            EncryptionUtil decryptText = new EncryptionUtil(source);
+                                            String decryptedText = decryptText.decrypt(b, 1).toString();
+                                            System.out.println(source + " <BROADCAST>: " + decryptedText);
+                                        }
+                                        else
+                                        {
+                                            System.out.println(input);
+                                        }
                                         
                                 }
                                 

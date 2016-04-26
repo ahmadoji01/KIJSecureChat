@@ -46,7 +46,7 @@ public class Client implements Runnable {
 			
 			Thread tr = new Thread(reader);
 			tr.start();
-                        
+
                         Write writer = new Write(chat, out, log);
 			
 			Thread tw = new Thread(writer);

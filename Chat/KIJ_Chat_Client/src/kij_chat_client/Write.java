@@ -70,6 +70,20 @@ public class Write implements Runnable {
                                     //String encryptedText = encryptText.encrypt(input.split(" ")[2]).toString();
                                     input = "bm " + (Base64.getEncoder().encodeToString(b));
                                 }
+                                else if(input.contains("gm"))
+                                {
+                                    EncryptionUtil encryptText = new EncryptionUtil(this.username);
+                                    String groupName = input.split(" ")[1];
+                                    String message = "";
+                                    String[] separatedMessage = input.split(" ");
+                                    for(int i = 2; i < separatedMessage.length; i++)
+                                    {
+                                        message += separatedMessage[i] + " ";
+                                    }
+                                    byte[] b = encryptText.encrypt(message, 1);
+                                    //String encryptedText = encryptText.encrypt(input.split(" ")[2]).toString();
+                                    input = "gm " + groupName + " " + (Base64.getEncoder().encodeToString(b));
+                                }
                                 
 				out.println(input);//SEND IT TO THE SERVER
 				out.flush();//FLUSH THE STREAM

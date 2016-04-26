@@ -161,7 +161,7 @@ public class Client implements Runnable{
                                                                     messageOut += vals[j] + " ";
                                                                 }
                                                                 System.out.println(this.username + " to " + vals[1] + " group: " + messageOut);
-                                                                outDest.println(this.username + " @ " + vals[1] + " group: " + messageOut);
+                                                                outDest.println("gm " + this.username + " " + vals[1] + " " + messageOut);
                                                                 outDest.flush();
                                                             }
                                                         }

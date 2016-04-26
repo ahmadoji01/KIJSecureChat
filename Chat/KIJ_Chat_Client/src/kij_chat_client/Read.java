@@ -57,7 +57,7 @@ public class Read implements Runnable {
                                             String message = input.split(" ")[3];
                                             byte[] b = Base64.getDecoder().decode(message);
                                             EncryptionUtil decryptText = new EncryptionUtil(dest);
-                                            String decryptedText = decryptText.decrypt(b, 0).toString();
+                                            String decryptedText = decryptText.decrypt(b, 0);
                                             System.out.println(source + ": " + decryptedText);
                                         }
                                         else if(input.split(" ")[0].toLowerCase().equals("bm"))
@@ -66,8 +66,18 @@ public class Read implements Runnable {
                                             String message = input.split(" ")[2];
                                             byte[] b = Base64.getDecoder().decode(message);
                                             EncryptionUtil decryptText = new EncryptionUtil(source);
-                                            String decryptedText = decryptText.decrypt(b, 1).toString();
+                                            String decryptedText = decryptText.decrypt(b, 1);
                                             System.out.println(source + " <BROADCAST>: " + decryptedText);
+                                        }
+                                        else if(input.split(" ")[0].toLowerCase().equals("gm"))
+                                        {
+                                            String source = input.split(" ")[1];
+                                            String groupName = input.split(" ")[2];
+                                            String message = input.split(" ")[3];
+                                            byte[] b = Base64.getDecoder().decode(message);
+                                            EncryptionUtil decryptText = new EncryptionUtil(source);
+                                            String decryptedText = decryptText.decrypt(b, 1);
+                                            System.out.println(source + " @ " + groupName + " group: " + decryptedText);
                                         }
                                         else
                                         {

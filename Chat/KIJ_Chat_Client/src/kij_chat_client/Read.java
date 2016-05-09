@@ -35,54 +35,54 @@ public class Read implements Runnable {
 			while (keepGoing)//WHILE THE PROGRAM IS RUNNING
 			{						
 				if(this.in.hasNext()) {
-                                                                   //IF THE SERVER SENT US SOMETHING
-                                        input = this.in.nextLine();
-                                        if (input.split(" ")[0].toLowerCase().equals("success")) {
-                                            if (input.split(" ")[1].toLowerCase().equals("logout")) {
-                                                keepGoing = false;
-                                                System.out.println(input);//PRINT IT OUT
-                                            } else if (input.split(" ")[1].toLowerCase().equals("login")) {
-                                                EncryptionUtil encrypttext = new EncryptionUtil(input.split(" ")[2]);
-                                                if(!encrypttext.areKeysPresent())
-                                                    encrypttext.generateKey();
-                                                log.clear();
-                                                log.add("true");
-                                                System.out.println(input);//PRINT IT OUT
-                                            }
-                                        }
-                                        else if(input.split(" ")[0].toLowerCase().equals("pm"))
-                                        {
-                                            String source = input.split(" ")[1];
-                                            String dest = input.split(" ")[2];
-                                            String message = input.split(" ")[3];
-                                            byte[] b = Base64.getDecoder().decode(message);
-                                            EncryptionUtil decryptText = new EncryptionUtil(dest);
-                                            String decryptedText = decryptText.decrypt(b, 0);
-                                            System.out.println(source + ": " + decryptedText);
-                                        }
-                                        else if(input.split(" ")[0].toLowerCase().equals("bm"))
-                                        {
-                                            String source = input.split(" ")[1];
-                                            String message = input.split(" ")[2];
-                                            byte[] b = Base64.getDecoder().decode(message);
-                                            EncryptionUtil decryptText = new EncryptionUtil(source);
-                                            String decryptedText = decryptText.decrypt(b, 1);
-                                            System.out.println(source + " <BROADCAST>: " + decryptedText);
-                                        }
-                                        else if(input.split(" ")[0].toLowerCase().equals("gm"))
-                                        {
-                                            String source = input.split(" ")[1];
-                                            String groupName = input.split(" ")[2];
-                                            String message = input.split(" ")[3];
-                                            byte[] b = Base64.getDecoder().decode(message);
-                                            EncryptionUtil decryptText = new EncryptionUtil(source);
-                                            String decryptedText = decryptText.decrypt(b, 1);
-                                            System.out.println(source + " @ " + groupName + " group: " + decryptedText);
-                                        }
-                                        else
-                                        {
+                                    //IF THE SERVER SENT US SOMETHING
+                                    input = this.in.nextLine();
+                                    if (input.split(" ")[0].toLowerCase().equals("success")) {
+                                        if (input.split(" ")[1].toLowerCase().equals("logout")) {
+                                            keepGoing = false;
+                                            System.out.println(input);//PRINT IT OUT
+                                        } else if (input.split(" ")[1].toLowerCase().equals("login")) {
+                                            EncryptionUtil encryptText = new EncryptionUtil(input.split(" ")[2]);
+                                            if(!encryptText.areKeysPresent())
+                                                encryptText.generateKey();
+                                            log.add("true");
+                                            log.clear();
                                             System.out.println(input);
                                         }
+                                    }
+                                    else if(input.split(" ")[0].toLowerCase().equals("pm"))
+                                    {
+                                        String source = input.split(" ")[1];
+                                        String dest = input.split(" ")[2];
+                                        String message = input.split(" ")[3];
+                                        byte[] b = Base64.getDecoder().decode(message);
+                                        EncryptionUtil decryptText = new EncryptionUtil(dest);
+                                        String decryptedText = decryptText.decrypt(b, 0);
+                                        System.out.println(source + ": " + decryptedText);
+                                    }
+                                    else if(input.split(" ")[0].toLowerCase().equals("bm"))
+                                    {
+                                        String source = input.split(" ")[1];
+                                        String message = input.split(" ")[2];
+                                        byte[] b = Base64.getDecoder().decode(message);
+                                        EncryptionUtil decryptText = new EncryptionUtil(source);
+                                        String decryptedText = decryptText.decrypt(b, 1);
+                                        System.out.println(source + " <BROADCAST>: " + decryptedText);
+                                    }
+                                    else if(input.split(" ")[0].toLowerCase().equals("gm"))
+                                    {
+                                        String source = input.split(" ")[1];
+                                        String groupName = input.split(" ")[2];
+                                        String message = input.split(" ")[3];
+                                        byte[] b = Base64.getDecoder().decode(message);
+                                        EncryptionUtil decryptText = new EncryptionUtil(source);
+                                        String decryptedText = decryptText.decrypt(b, 1);
+                                        System.out.println(source + " @ " + groupName + " group: " + decryptedText);
+                                    }
+                                    else
+                                    {
+                                        System.out.println(input);
+                                    }
                                         
                                 }
                                 

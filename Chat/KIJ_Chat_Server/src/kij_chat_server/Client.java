@@ -191,6 +191,13 @@ public class Client implements Runnable{
                                                 }
                                             }
                                         }
+                                        
+                                        if((input.split(" ")[0].toLowerCase() + " " + input.split(" ")[1].toLowerCase()).equals("request certificate"))
+                                        {
+                                            String name = this.username;
+                                            DigitalCert signCert = new DigitalCert();
+                                            signCert.SignCertificate(name, 365, "SHA1withRSA");
+                                        }
 				}
 			}
 		} 

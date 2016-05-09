@@ -22,6 +22,10 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		try 
 		{
+                        EncryptionUtil generateKey = new EncryptionUtil();
+                        if(!generateKey.areKeysPresent())
+                            generateKey.generateKey();
+                        
 			final int PORT = 6677;//SET NEW CONSTANT VARIABLE: PORT
 			ServerSocket server = new ServerSocket(PORT); //SET PORT NUMBER
 			System.out.println("Waiting for clients...");//AT THE START PRINT THIS
